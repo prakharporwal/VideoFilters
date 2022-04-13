@@ -2,7 +2,7 @@
 
 FaceMesh LandMarks
 
-![Landmarks](https://github.com/prakharporwal/VideoFilters/blob/main/canonical_face_model_uv_visualization.png.jpg?raw=true)
+![Landmarks](https://github.com/prakharporwal/VideoFilters/blob/main/canonical_face_model_uv_visualization.png?raw=true)
 
 Tasks
 
