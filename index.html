@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8" />
@@ -18,24 +17,52 @@
       src="https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh/face_mesh.js"
       crossorigin="anonymous"
     ></script>
-    <script src="p5.Image.js"></script>
-    <script src="p5.min.js"></script>
+    <!-- <script src="p5.Image.js"></script>
+    <script src="p5.min.js"></script> -->
+    <title>Video Filters</title>
   </head>
-  <title>Video Filters</title>
+
   <body>
     <div class="container">
+      <!-- <template> -->
       <video class="input_video"></video>
-      <canvas class="output_canvas" width="1280px" height="720px"></canvas>
+      <!-- </template> -->
+      <canvas class="output_canvas" width="1280px" height="720px"> </canvas>
     </div>
+    <!-- <script>
+      var exports = {};
+    </script>
+
+    <script type="module" src="some.js"></script> -->
 
     <script type="module">
       const videoElement = document.getElementsByClassName("input_video")[0];
       const canvasElement = document.getElementsByClassName("output_canvas")[0];
       const canvasCtx = canvasElement.getContext("2d");
+      const myImage = new Image(30, 30);
+      myImage.src = "mask.png";
 
       function onResults(results) {
         canvasCtx.save();
         canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
+        // console.log(results);
+        // Only overwrite existing pixels.
+
+        // canvasCtx.globalCompositeOperation = "source-in";
+        // canvasCtx.fillRect(0, 0, canvasElement.width, canvasElement.height);
+
+        // Only overwrite missing pixels.
+
+        // canvasCtx.globalCompositeOperation = "source-over";
+
+        // canvasCtx.drawImage(
+        //   results.segmentationMask,
+        //   0,
+        //   0,
+        //   canvasElement.width,
+        //   canvasElement.heighheightpositeOperation = "source-in";
+        // canvasCtx.filter = "none";
+
         canvasCtx.drawImage(
           results.image,
           0,
@@ -46,38 +73,248 @@
 
         if (results.multiFaceLandmarks) {
           for (const landmarks of results.multiFaceLandmarks) {
-            drawConnectors(canvasCtx, landmarks, FACEMESH_TESSELATION, {
-              color: "#C0C0C070",
-              lineWidth: 1,
-            });
-            drawConnectors(canvasCtx, landmarks, FACEMESH_RIGHT_EYE, {
-              color: "#FF3030",
-            });
-            drawConnectors(canvasCtx, landmarks, FACEMESH_RIGHT_EYEBROW, {
-              color: "#FF3030",
-            });
-            drawConnectors(canvasCtx, landmarks, FACEMESH_RIGHT_IRIS, {
-              color: "#FF3030",
-            });
+            // canvasCtx.fillStyle = "#eee";
+            // canvasCtx.fillRect(
+            //   landmarks[0],
+            //   landmarks[1],
+            //   canvasElement.width,
+            //   canvasElement.height
+            // );
+            // console.log(landmarks[100].x, landmarks[100].y);
+            // console.log(
+            //   (-landmarks[100].x + landmarks[200].x) * 7000,
+            //   (-landmarks[100].y + landmarks[200].y) * 800
+            // );
+            console.log(landmarks);
+            // dot on the face
+
+            // canvasCtx.globalCompositeOperation = "copy";
+            // canvasCtx.filter = "none";
+
+            // drawLandmarks(canvasCtx, landmarks, FACEMESH_LIPS, {
+            //   color: "#0dde04",
+            //   radius: 1,
+            // });
+
+            // canvasCtx.drawImage(
+            //   myImage,
+            //   0,
+            //   0,
+            //   canvasElement.width,
+            //   canvasElement.height
+            // );
+
+            // canvasCtx.globalCompositeOperation = "source-in";
+            // canvasCtx.filter = "none";
+
+            // canvasCtx.drawImage(
+            //   myImage,
+            //   landmarks[117].x * 1150,
+            //   landmarks[117].y * 1150,
+            //   (-landmarks[234].x + landmarks[454].x) * 1600,
+            //   (-landmarks[152].y + landmarks[10].y) * 600
+            // );
+            // drawLandmarks(canvasCtx, landmarks, {
+            //   color: "#11ffee",
+            //   radius: 0.1,
+            // });
+            // drawConnectors(canvasCtx, landmarks, FACEMESH_LIPS, {
+            //   image: myImage,
+            //   fill: "red",
+            //   // lineWidth: 1,
+            // });
+            // drawConnectors(canvasCtx, landmarks, FACEMESH_CONTOURS, {
+            //   color: "#FF3030",
+            // });
+            // drawConnectors(canvasCtx, landmarks, FACEMESH_RIGHT_IRIS, {
+            //   color: "#FF3030",
+            // });
+            // drawConnectors(canvasCtx, landmarks, FACEMESH_LEFT_EYE, {
+            //   color: "#30FF30",
+            // });
+            // drawConnectors(canvasCtx, landmarks, FACEMESH_LEFT_EYEBROW, {
+            //   color: "#30FF30",
+            // });
+            // drawConnectors(canvasCtx, landmarks, FACEMESH_LEFT_IRIS, {
+            //   color: "#30FF30",
+            // });
+            // face ovalshape
+
+            // drawConnectors(canvasCtx, landmarks, FACEMESH_FACE_OVAL, {
+            //   color: "#E0E0E0",
+            // });
+
+            // drawDetection(canvasCtx, landmarks, FACEMESH_LIPS, {
+            //   color: "pink",
+            // });
+
+            // drawConnectors(canvasCtx, landmarks, FACEMESH_LIPS.slice(0, 20), {
+            //   color: "pink",
+            // });
+
+            // drawConnectors(canvasCtx, landmarks, FACEMESH_RIGHT_EYEBROW, {
+            //   color: "yellow",
+            // });
+
             drawConnectors(canvasCtx, landmarks, FACEMESH_LEFT_EYE, {
-              color: "#30FF30",
+              color: "black",
             });
-            drawConnectors(canvasCtx, landmarks, FACEMESH_LEFT_EYEBROW, {
-              color: "#30FF30",
+
+            drawConnectors(canvasCtx, landmarks, FACEMESH_RIGHT_EYE, {
+              color: "black",
             });
-            drawConnectors(canvasCtx, landmarks, FACEMESH_LEFT_IRIS, {
-              color: "#30FF30",
-            });
-            drawConnectors(canvasCtx, landmarks, FACEMESH_FACE_OVAL, {
-              color: "#E0E0E0",
-            });
-            drawConnectors(canvasCtx, landmarks, FACEMESH_LIPS, {
-              color: "#E0E0E0",
-            });
+
+            drawConnectors(
+              canvasCtx,
+              landmarks,
+              [
+                [234, 454],
+                [356, 454],
+                [454, 323],
+                [127, 234],
+                [234, 93],
+              ],
+              {
+                color: "black",
+              }
+            );
+
+            let lips = [
+              [61],
+              [185],
+              [40],
+              [39],
+              [37],
+              [0],
+              [267],
+              [269],
+              [270],
+              [409],
+              [291],
+              [78],
+              [191],
+              [80],
+              [81],
+              [82],
+              [13],
+              [312],
+              [311],
+              [310],
+              [415],
+              [308],
+            ];
+
+            fillPolygon(landmarks, FACEMESH_RIGHT_IRIS, "orange");
+            fillPolygon(landmarks, FACEMESH_LEFT_IRIS, "orange");
+
+            // fillPolygon(landmarks, FACEMESH_LEFT_EYE, "black");
+            // fillPolygon(landmarks, FACEMESH_RIGHT_EYE, "black");
+
+            fillPolygon(landmarks, FACEMESH_RIGHT_EYEBROW, "green");
+            fillPolygon(landmarks, FACEMESH_LEFT_EYEBROW, "green");
+
+            fillPolygon(
+              landmarks,
+              FACEMESH_LIPS.slice(0, 10),
+              "rgb(144,30,100,0.7)"
+            );
+            fillPolygon(
+              landmarks,
+              FACEMESH_LIPS.slice(10, 20),
+              "rgb(144,30,100,0.7)"
+            );
+
+            fillPolygon(landmarks, FACEMESH_LIPS.slice(20, 30), "rgb(0,0,0,1)");
+            fillPolygon(landmarks, FACEMESH_LIPS.slice(30, 40), "rgb(0,0,0,1)");
+
+            canvasCtx.globalCompositeOperation = "destination";
+            canvasCtx.filter = "none";
+            canvasCtx.drawImage(
+              myImage,
+              landmarks[234].x * 1280,
+              landmarks[234].y * 720,
+              0,
+              0,
+              (-landmarks[454].x + landmarks[356].x) * 1600,
+              (-landmarks[454].y + landmarks[356].y) * 600,
+              0,
+              0
+            );
           }
         }
 
         canvasCtx.restore();
+      }
+
+      function fillPolygon(landmarks, target, color, opacity) {
+        // console.log(points);
+        console.log(landmarks);
+        console.log(target);
+
+        let points = [];
+
+        let flag = false;
+        target.map((item, index) => {
+          // console.log(index);
+          // if (index > 0 && item[0] !== target[index - 1][1]) {
+          //   flag = true;
+          // }
+          console.log("connecting ", item);
+          points.push({
+            x: 1280 * landmarks[item[0]].x,
+            y: 720 * landmarks[item[0]].y,
+          });
+
+          if (index == target.length - 1) {
+            // if (flag == false) {
+            points.push({
+              x: 1280 * landmarks[item[1]].x,
+              y: 720 * landmarks[item[1]].y,
+            });
+            // console.log(landmarks[item[0]].x, landmarks[item[0]].y);
+          }
+        });
+
+        if (points.length > 0) {
+          canvasCtx.fillStyle = color; // all css colors are accepted by this property
+
+          let point = points[0];
+
+          canvasCtx.beginPath();
+          canvasCtx.moveTo(point.x, point.y); // point 1
+
+          for (var i = 0; i < points.length; i++) {
+            point = points[i];
+            canvasCtx.lineTo(point.x, point.y);
+          }
+
+          // for (var i = 30; i < 40; ++i) {
+          //   point = points[i];
+          //   console.log(points);
+          //   canvasCtx.lineTo(point.x, point.y);
+          // }
+
+          canvasCtx.closePath(); // go back to point 1
+          canvasCtx.fill();
+        }
+
+        // if (points2.length > 0) {
+        //   canvasCtx.fillStyle = "rgba(128, 128, 128, 0.8)"; // all css colors are accepted by this property
+
+        //   let point = points2[0];
+
+        //   canvasCtx.beginPath();
+        //   canvasCtx.moveTo(point.x, point.y); // point 1
+
+        //   for (var i = 1; i < points2.length; ++i) {
+        //     point = points2[i];
+
+        //     canvasCtx.lineTo(point.x, point.y);
+        //   }
+
+        //   canvasCtx.closePath(); // go back to point 1
+        //   canvasCtx.fill();
+        // }
       }
 
       const faceMesh = new FaceMesh({
@@ -86,7 +323,8 @@
         },
       });
       faceMesh.setOptions({
-        maxNumFaces: 1,
+        staticImageMode: true,
+        maxNumFaces: 3,
         refineLandmarks: true,
         minDetectionConfidence: 0.5,
         minTrackingConfidence: 0.5,
