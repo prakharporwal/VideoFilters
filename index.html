@@ -40,7 +40,7 @@
       const canvasElement = document.getElementsByClassName("output_canvas")[0];
       const canvasCtx = canvasElement.getContext("2d");
       const myImage = new Image(30, 30);
-      myImage.src = "mask.png";
+      myImage.src = "item.svg";
 
       function onResults(results) {
         canvasCtx.save();
@@ -179,31 +179,6 @@
               }
             );
 
-            let lips = [
-              [61],
-              [185],
-              [40],
-              [39],
-              [37],
-              [0],
-              [267],
-              [269],
-              [270],
-              [409],
-              [291],
-              [78],
-              [191],
-              [80],
-              [81],
-              [82],
-              [13],
-              [312],
-              [311],
-              [310],
-              [415],
-              [308],
-            ];
-
             fillPolygon(landmarks, FACEMESH_RIGHT_IRIS, "orange");
             fillPolygon(landmarks, FACEMESH_LEFT_IRIS, "orange");
 
@@ -227,19 +202,15 @@
             fillPolygon(landmarks, FACEMESH_LIPS.slice(20, 30), "rgb(0,0,0,1)");
             fillPolygon(landmarks, FACEMESH_LIPS.slice(30, 40), "rgb(0,0,0,1)");
 
-            canvasCtx.globalCompositeOperation = "destination";
-            canvasCtx.filter = "none";
-            // canvasCtx.drawImage(
-            //   myImage,
-            //   landmarks[234].x * 1280,
-            //   landmarks[234].y * 720,
-            //   0,
-            //   0,
-            //   (-landmarks[454].x + landmarks[356].x) * 1600,
-            //   (-landmarks[454].y + landmarks[356].y) * 600,
-            //   0,
-            //   0
-            // );
+            // canvasCtx.globalCompositeOperation = "destination-out";
+            // canvasCtx.filter = "none";
+            canvasCtx.drawImage(
+              myImage,
+              landmarks[93].x * 1280,
+              landmarks[93].y * 720,
+              (landmarks[454].x - landmarks[356].x) * 50000,
+              (landmarks[454].y - landmarks[356].y) * 6000
+            );
           }
         }
 
